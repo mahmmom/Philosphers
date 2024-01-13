@@ -25,7 +25,7 @@ static char	*is_valid(char *str)
 	if (str[i] == '+')
 		i++;
 	if (str[i] == '-')
-		error_handle(NULL, "Only Positive Numbers Allowed\n");
+		error_handle("Only Positive Numbers Allowed");
 	validated = str;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
@@ -51,7 +51,7 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	if (result < 0)
-		error_handle(NULL, "Number is > INT_MAX\n");
+		error_handle("Number is > INT_MAX");
 	return (result);
 }
 

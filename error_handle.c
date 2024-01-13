@@ -12,13 +12,11 @@
 
 #include "philo.h"
 
-void	error_handle(char **av, char *msg)
+void	error_handle(char *msg)
 {
 	if (msg)
-		write(1, msg, ft_strlen(msg));
-	if (av)
-		free_string(av);
-	exit(EXIT_FAILURE);
+		printf("%s\n", msg);
+	return;
 }
 
 void	free_string(char **str)

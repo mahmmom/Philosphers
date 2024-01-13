@@ -18,8 +18,8 @@ int	main(int ac, char **av)
 
 	if (5 == ac || 6 == ac)
 	{
-		parse_args(av);
-		init_philo(&data, av);
+		parse_args(&data, av);
+		init_philo(&data);
 	}
 	else
 		error_handle(NULL, "Error, invalid Number of arguments\n");

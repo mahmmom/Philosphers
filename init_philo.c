@@ -11,17 +11,36 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <pthread.h>
 
-void	init_philo(t_data *data, char **av)
+void	*malloc_handler(size_t	bytes)
 {
-	if (!av)
-		return ;
-	data->philo_num = ft_atoi(av[1]);
-	data->t_to_die = ft_atoi(av[2]);
-	data->t_to_eat = ft_atoi(av[3]);
-	data->t_to_sleep = ft_atoi(av[4]);
-	if (av[5])
-		data->num_meals_limit = ft_atoi(av[5]);
+	void	*temp;
+
+	temp = malloc(bytes);
+	if (NULL == temp)
+		error_handle("Malloc Error");
+	return (temp);
+}
+
+static 
+
+void	mutex_error_handler(t_mutx	*mutex, t_opcode opcode)
+{
+	if (LOCK == opcode)
+		pthread_mutex_lock(mutex);
+	else if (LOCK == opcode)
+		pthread_mutex_unlock(mutex);
+	else if (LOCK == opcode)
+		pthread_mutex_init(mutex, NULL);
+	else if (LOCK == opcode)
+		pthread_mutex_destroy(mutex);
 	else
-		data->num_meals_limit = -1;
+		pthread_mutex_lock(mutex);
+}
+
+void	init_philo(t_data	*data)
+{
+	data->end_experiment = false;
+	data->philos = malloc_handler(data->philo_num);
 }

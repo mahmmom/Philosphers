@@ -43,16 +43,32 @@ typedef struct s_data
 	t_philo				*philos;
 }						t_data;
 
+
+typedef enum e_opcode {
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}	t_opcode;
+
+
+
+
+
+
+
 /*
 Parsing
 */
-void					parse_args(char **av);
-void					init_philo(t_data *philo, char **av);
+void					parse_args(t_data *philo, char **av);
 
 /*
 Error_handle
 */
-void					error_handle(char **av, char *msg);
+void					error_handle(char *msg);
 void					free_string(char **str);
 
 /*
@@ -60,5 +76,10 @@ Utils
 */
 int	ft_atoi(char *str);
 size_t	ft_strlen(char *s);
+
+/*
+Philo Init
+*/
+void	init_philo(t_data	*data);
 
 #endif
