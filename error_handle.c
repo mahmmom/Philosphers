@@ -19,15 +19,3 @@ void	error_handle(char *msg)
 	return;
 }
 
-void	free_string(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}

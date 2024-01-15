@@ -1,6 +1,6 @@
 NAME = philo
 
-SRCS = main.c parsing.c error_handle.c init_philo.c utils.c\
+SRCS = main.c parsing.c error_handle.c init_philo.c utils.c mtx_thread_error.c\
 
 OBJS = $(SRCS:.c=.o)
 

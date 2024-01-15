@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <pthread.h>
+# include <errno.h>
 
 typedef pthread_mutex_t	t_mutx;
 
@@ -24,8 +25,8 @@ typedef struct s_philo
 	size_t				meals_count;
 	bool				full;
 	size_t				last_meal_time;
-	t_fork				*right_fork;
-	t_fork				*left;
+	t_fork				*first_fork;
+	t_fork				*second_fork;
 	pthread_t			thread_id;
 	t_data				*data;
 }						t_philo;
@@ -55,7 +56,12 @@ typedef enum e_opcode {
 }	t_opcode;
 
 
-
+/*
+Safe Function
+*/
+void	mutex_handler(t_mutx *mutex, t_opcode opcode);
+void	thread_handle(pthread_t *thread, void *(*foo)(void *),
+		void *data, t_opcode opcode);
 
 
 
@@ -80,6 +86,7 @@ size_t	ft_strlen(char *s);
 /*
 Philo Init
 */
-void	init_philo(t_data	*data);
+void	init_data(t_data *data);
+
 
 #endif
