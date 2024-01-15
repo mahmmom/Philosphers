@@ -60,8 +60,7 @@ typedef enum e_opcode {
 Safe Function
 */
 void	mutex_handler(t_mutx *mutex, t_opcode opcode);
-void	thread_handle(pthread_t *thread, void *(*foo)(void *),
-		void *data, t_opcode opcode);
+void	thread_handle(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
 
 
 
