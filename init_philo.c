@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 11:46:55 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/10 19:12:42 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:46:17 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ void	init_data(t_data	*data)
 	size_t i;
 
 	i = 0;
-	data->end_experiment = false;
+	data->end_routine = false;
+	data->all_threads_ready = false;
 	data->philos = malloc_handler(data->philo_num);
+	mutex_handler(&data->data_mutex, INIT);
 	data->forks = malloc_handler(sizeof(t_fork) * data->philo_num);
 	while (i < data->philo_num)
 	{
@@ -74,4 +76,4 @@ void	init_data(t_data	*data)
 	}
 	init_philo(data);
 }
-
+ 

@@ -38,8 +38,10 @@ typedef struct s_data
 	size_t				t_to_eat;
 	size_t				t_to_sleep;
 	size_t				num_meals_limit;
-	size_t				start_experiment;
-	bool				end_experiment;
+	size_t				start_routine;
+	bool				end_routine;
+	bool				all_threads_ready;
+	t_mutx				data_mutex;
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
@@ -86,6 +88,26 @@ size_t	ft_strlen(char *s);
 Philo Init
 */
 void	init_data(t_data *data);
+
+/*
+routine
+*/
+void   routine_start(t_data *data);
+
+/*
+sync
+*/
+void	wait_all_threads(t_data *data);
+
+
+/*
+set & get
+*/
+void	set_bool(t_mutx *mutex, bool *dest, bool value);
+bool	get_bool(t_mutx *mutex, bool *value);
+void	set_long(t_mutx *mutex, long *dest, long value);
+long	get_long(t_mutx *mutex, long *value);
+bool	rotuine_finished(t_data	*data);
 
 
 #endif
