@@ -8,6 +8,7 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <errno.h>
+# include <sys/time.h>
 
 typedef pthread_mutex_t	t_mutx;
 
@@ -58,6 +59,13 @@ typedef enum e_opcode {
 }	t_opcode;
 
 
+typedef enum	e_time {
+	SECOND,
+	MILLISECOND,
+	MICROSECOND,
+}				t_time;
+
+
 /*
 Safe Function
 */
@@ -83,6 +91,7 @@ Utils
 */
 int	ft_atoi(char *str);
 size_t	ft_strlen(char *s);
+long	get_time_day(t_time time);
 
 /*
 Philo Init
