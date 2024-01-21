@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 11:46:55 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/18 17:49:53 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:12:43 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_pos)
 
 static void	init_philo(t_data *data)
 {
-	size_t	i;
+	int		i;
 	t_philo	*philo;
 
 	i = 0;
@@ -51,6 +51,7 @@ static void	init_philo(t_data *data)
 		philo->id = i + 1;
 		philo->full = false;
 		philo->meals_count = 0;
+		mutex_handler(&philo->pilo_mutex, INIT);
 		philo->data = data;
 		assign_forks(philo, data->forks, i);
 		i++;
@@ -59,14 +60,16 @@ static void	init_philo(t_data *data)
 
 void	init_data(t_data *data)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	data->end_routine = false;
 	data->all_threads_ready = false;
-	data->philos = malloc_handler(data->philo_num);
-	mutex_handler(&data->data_mutex, INIT);
+	data->running_threads_num = 0;
+	data->philos = malloc_handler(sizeof(t_philo) * data->philo_num);
 	data->forks = malloc_handler(sizeof(t_fork) * data->philo_num);
+	mutex_handler(&data->status_mutex, INIT);
+	mutex_handler(&data->data_mutex, INIT);
 	while (i < data->philo_num)
 	{
 		mutex_handler(&data->forks[i].fork, INIT);

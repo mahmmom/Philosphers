@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:50:01 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/18 18:59:29 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:29:27 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,29 @@ long	get_time_day(t_time time)
 	else if (MICROSECOND == time)
 		return ((tv.tv_sec * 1e6) + (tv.tv_usec));
 	else
-		return (error_handle("Wrong time"),0);
-	//return (404);
+		error_handle("Wrong time");
+	return (404);
 }
 
-void	ft_usleep()
+void	ft_usleep(long	usec, t_data *data)
 {
-	
+	long	start;
+	long	elapse;
+	long	rem;
+
+	start = get_time_day(MICROSECOND);
+	while (get_time_day(MICROSECOND) - start < usec)
+	{
+		if (rotuine_finished(data))
+			break ;
+		elapse = get_time_day(MICROSECOND) - start;
+		rem = usec - elapse;
+		if (rem > 1e3)
+			usleep(rem / 2);
+		else
+		{
+			while (get_time_day(MICROSECOND) - start < usec)
+				;
+		}
+	}
 }

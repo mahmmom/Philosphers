@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:58:18 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/09 18:42:02 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/01/21 14:25:21 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 	{
 		parse_args(&data, av);
 		init_data(&data);
+		routine_start(&data);
 	}
 	else
 		error_handle("Error, invalid Number of arguments");

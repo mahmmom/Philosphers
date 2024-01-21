@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:44:07 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/16 18:44:08 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/01/21 14:23:12 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	mutex_error_handler(int status, t_opcode opcode)
 {
-	if (0 == status)
+if (0 == status)
 		return ;
 	if (EINVAL == status && (LOCK == opcode || UNLOCK == opcode))
 		error_handle("The value specified by mutex is invalid");
@@ -36,14 +36,15 @@ void	mutex_handler(t_mutx *mutex, t_opcode opcode)
 {
 	if (LOCK == opcode)
 		mutex_error_handler(pthread_mutex_lock(mutex), opcode);
-	else if (LOCK == opcode)
+	else if (UNLOCK == opcode)
 		mutex_error_handler(pthread_mutex_unlock(mutex), opcode);
-	else if (LOCK == opcode)
+	else if (INIT == opcode)
 		mutex_error_handler(pthread_mutex_init(mutex, NULL), opcode);
-	else if (LOCK == opcode)
+	else if (DESTROY == opcode)
 		mutex_error_handler(pthread_mutex_destroy(mutex), opcode);
 	else
-		mutex_error_handler(pthread_mutex_lock(mutex), opcode);
+		error_handle("Wrong opcode for mutex_handle:"
+			"use <LOCK> <UNLOCK> <INIT> <DESTROY>");
 }
 
 static void	handle_thread_error(int status, t_opcode opcode)

@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:59:24 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/10 19:13:33 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:51:00 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_valid_number(char *str)
 	return (0);
 }
 
-void	iparse_args(t_data *data, char **av)
+void	parse_args(t_data *data, char **av)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ void	iparse_args(t_data *data, char **av)
 	if (data->t_to_die < 60e3
 		|| data->t_to_eat < 60e3
 			|| data->t_to_sleep < 60e3)
-				error_handle("Timestamp should be > 60ms");
+			error_handle("Timestamp should be > 60ms");
 	if (av[5])
 		data->num_meals_limit = ft_atoi(av[5]);
 	else
