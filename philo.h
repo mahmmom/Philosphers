@@ -104,6 +104,7 @@ Error_handle
 void					parse_args(t_data *philo, char **av);
 void					error_handle(char *msg);
 void					free_string(char **str);
+void					clean_exit(t_data *data);
 
 /*
 Utils
@@ -123,6 +124,8 @@ routine
 */
 void					routine_start(t_data *data);
 void					*monitor_routine(void	*table);
+void					thinking_routine(t_philo *philo, bool pre_routine);
+void					de_sync(t_philo	*philo);
 
 /*
 sync

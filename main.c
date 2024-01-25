@@ -21,6 +21,7 @@ int	main(int ac, char **av)
 		parse_args(&data, av);
 		init_data(&data);
 		routine_start(&data);
+		clean_exit(&data);
 	}
 	else
 		error_handle("Error, invalid Number of arguments");

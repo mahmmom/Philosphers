@@ -22,13 +22,22 @@ static	void	*one_philo(void	*one_philo)
 	increase_long(&philo->data->data_mutex, &philo->data->running_threads_num);
 	philo_status(TAKE_FIRST_FORK, philo, DEBUGGER);
 	while (!rotuine_finished(philo->data))
-		usleep(200);
+		ft_usleep(200, philo->data);
 	return (NULL);
 }
 
-static void thinking_routine(t_philo *philo)
+void thinking_routine(t_philo *philo, bool pre_routine)
 {
-	philo_status(THINKING, philo, DEBUGGER);
+	long	t_think;
+
+	if (!pre_routine)
+		philo_status(THINKING, philo, DEBUGGER);
+	if (philo->data->philo_num % 2 == 0)
+		return ;
+	t_think = (philo->data->t_to_eat * 2) - philo->data->t_to_sleep;
+	if (t_think < 0)
+		t_think = 0;
+	ft_usleep(t_think * 0.42, philo->data);
 }
 
 static void	eating_routine(t_philo	*philo)
@@ -56,6 +65,7 @@ void	*routine_dinner(void *data)
 	wait_all_threads(philo->data);
 	set_long(&philo->pilo_mutex, &philo->last_meal_time, get_time_day(MILLISECOND));
 	increase_long(&philo->data->data_mutex, &philo->data->running_threads_num);
+	de_sync(philo);
 	while (!rotuine_finished(philo->data))
 	{
 		if (philo->full)
@@ -63,7 +73,7 @@ void	*routine_dinner(void *data)
 		eating_routine(philo);
 		philo_status(SLEEPING, philo, DEBUGGER);
 		ft_usleep(philo->data->t_to_sleep, philo->data);
-		thinking_routine(philo);
+		thinking_routine(philo, false);
 	}
 	return (NULL);
 }
@@ -84,9 +94,9 @@ void	*routine_dinner(void *data)
 	thread_handle(&data->monitor, monitor_routine, data, CREATE);
 	data->start_routine = get_time_day(MILLISECOND);
 	set_bool(&data->data_mutex, &data->all_threads_ready, true);
-	i = 0;
+	i = -1;
 	while (++i < data->philo_num)
 		thread_handle(&data->philos[i].thread_id, NULL, NULL, JOIN);
 	set_bool(&data->data_mutex, &data->end_routine, true);
-	//thread_handle(&data->monitor, NULL, NULL, JOIN);
+	thread_handle(&data->monitor, NULL, NULL, JOIN);
 }

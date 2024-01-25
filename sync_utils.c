@@ -36,3 +36,17 @@ void	increase_long(t_mutx *data_mutex, long	*threads_num)
 	(*threads_num)++;
 	mutex_handler(data_mutex, UNLOCK);
 }
+
+void	de_sync(t_philo	*philo)
+{
+	if (philo->data->philo_num % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			ft_usleep(3e4, philo->data);
+	}
+	else
+	{
+		if (philo->id % 2)
+			thinking_routine(philo, true);
+	}
+}

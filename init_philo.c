@@ -44,8 +44,8 @@ static void	init_philo(t_data *data)
 	int		i;
 	t_philo	*philo;
 
-	i = 0;
-	while (i < data->philo_num)
+	i = -1;
+	while (++i < data->philo_num)
 	{
 		philo = data->philos + i;
 		philo->id = i + 1;
@@ -54,7 +54,6 @@ static void	init_philo(t_data *data)
 		mutex_handler(&philo->pilo_mutex, INIT);
 		philo->data = data;
 		assign_forks(philo, data->forks, i);
-		i++;
 	}
 }
 
@@ -62,7 +61,7 @@ void	init_data(t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	data->end_routine = false;
 	data->all_threads_ready = false;
 	data->running_threads_num = 0;
@@ -70,11 +69,10 @@ void	init_data(t_data *data)
 	data->forks = malloc_handler(sizeof(t_fork) * data->philo_num);
 	mutex_handler(&data->status_mutex, INIT);
 	mutex_handler(&data->data_mutex, INIT);
-	while (i < data->philo_num)
+	while (++i < data->philo_num)
 	{
 		mutex_handler(&data->forks[i].fork, INIT);
 		data->forks[i].fork_id = i;
-		i++;
 	}
 	init_philo(data);
 }
