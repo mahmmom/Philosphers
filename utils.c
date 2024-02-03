@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:50:01 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/21 15:29:27 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:47:15 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*is_valid(char *str)
 	int		i;
 	int		len;
 	char	*validated;
-	
+
 	i = 0;
 	len = 0;
 	while (((str[i] >= 9 && str[i] <= 13) || str[i] == 32) && str[i])
@@ -39,7 +39,7 @@ int	ft_atoi(char *str)
 {
 	int	result;
 	int	i;
-	
+
 	result = 0;
 	i = 0;
 	str = is_valid(str);
@@ -56,7 +56,7 @@ int	ft_atoi(char *str)
 long	get_time_day(t_time time)
 {
 	struct timeval	tv;
-	
+
 	if (gettimeofday(&tv, NULL))
 		error_handle("Gettimeofday error");
 	if (SECOND == time)
@@ -70,7 +70,7 @@ long	get_time_day(t_time time)
 	return (404);
 }
 
-void	ft_usleep(long	usec, t_data *data)
+void	ft_usleep(long usec, t_data *data)
 {
 	long	start;
 	long	elapse;
@@ -92,3 +92,17 @@ void	ft_usleep(long	usec, t_data *data)
 		}
 	}
 }
+
+// int	ft_usleep(size_t milliseconds,  t_data *data)
+// {
+// 	size_t	start;
+
+// 	start = get_current_time();
+// 	while ((get_current_time() - start) < milliseconds)
+// 	{
+// 		if(!philo_died)
+// 			return ();
+// 		usleep(500);
+// 	}
+// 	return (0);
+// }

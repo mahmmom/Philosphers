@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 13:07:47 by mohamoha          #+#    #+#             */
-/*   Updated: 2023/12/28 10:40:47 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:35:54 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_handle(char *msg)
 {
 	if (msg)
 		printf("%s\n", msg);
-	return;
+	return ;
 }
 
 void	clean_exit(t_data *data)

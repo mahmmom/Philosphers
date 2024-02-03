@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/03 18:42:38 by mohamoha          #+#    #+#             */
+/*   Updated: 2024/02/03 18:42:39 by mohamoha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -18,8 +30,6 @@
 # define M "\033[1;35m"   /* Bold Magenta */
 # define C "\033[1;36m"   /* Bold Cyan */
 # define W "\033[1;37m"   /* Bold White */
-
-# define DEBUGGER 0
 
 typedef pthread_mutex_t	t_mutx;
 
@@ -101,7 +111,7 @@ void					thread_handle(pthread_t *thread, void *(*foo)(void *),
 Parsing
 Error_handle
 */
-void					parse_args(t_data *philo, char **av);
+int						parse_args(t_data *data, char **av);
 void					error_handle(char *msg);
 void					free_string(char **str);
 void					clean_exit(t_data *data);
@@ -123,15 +133,16 @@ void					init_data(t_data *data);
 routine
 */
 void					routine_start(t_data *data);
-void					*monitor_routine(void	*table);
+void					*monitor_routine(void *table);
 void					thinking_routine(t_philo *philo, bool pre_routine);
-void					de_sync(t_philo	*philo);
+void					de_sync(t_philo *philo);
 
 /*
 sync
 */
 void					wait_all_threads(t_data *data);
-bool					all_threads_running(t_mutx	*mutex, long *threads, long philo_num);
+bool					all_threads_running(t_mutx *mutex, long *threads,
+							long philo_num);
 
 /*
 set & get
@@ -141,12 +152,12 @@ bool					get_bool(t_mutx *mutex, bool *value);
 void					set_long(t_mutx *mutex, long *dest, long value);
 long					get_long(t_mutx *mutex, long *value);
 bool					rotuine_finished(t_data *data);
-void					increase_long(t_mutx *data_mutex, long	*threads_num);
+void					increase_long(t_mutx *data_mutex, long *threads_num);
 
 /*
 Routine message
 */
-void					philo_status(t_philo_status status, t_philo *philo,
-							bool bug_check);
+void					philo_status(t_philo_status status, t_philo *philo);
+bool					philo_died(t_philo *philo);
 
 #endif

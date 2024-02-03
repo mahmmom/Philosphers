@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:44:07 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/21 14:23:12 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:42:06 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	mutex_error_handler(int status, t_opcode opcode)
 {
-if (0 == status)
+	if (0 == status)
 		return ;
 	if (EINVAL == status && (LOCK == opcode || UNLOCK == opcode))
 		error_handle("The value specified by mutex is invalid");

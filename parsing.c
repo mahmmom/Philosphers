@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:59:24 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/01/21 13:51:00 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:42:26 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,40 @@ static int	is_valid_number(char *str)
 	return (0);
 }
 
-void	parse_args(t_data *data, char **av)
+static int	ft_check(char **av)
 {
 	int	i;
 
-	if (!av)
-		return ;
 	i = 1;
 	while (av[i])
 	{
 		if (av[i][0] == '\0' || is_valid_number(av[i]) == 1)
+		{
 			error_handle("Error, invalid arguments");
+			return (1);
+		}
 		i++;
 	}
+	return (0);
+}
+
+int	parse_args(t_data *data, char **av)
+{
+	if (ft_check(av) == 1)
+		return (1);
 	data->philo_num = ft_atoi(av[1]);
 	data->t_to_die = ft_atoi(av[2]) * 1e3;
 	data->t_to_eat = ft_atoi(av[3]) * 1e3;
 	data->t_to_sleep = ft_atoi(av[4]) * 1e3;
-	if (data->t_to_die < 60e3
-		|| data->t_to_eat < 60e3
-			|| data->t_to_sleep < 60e3)
-			error_handle("Timestamp should be > 60ms");
+	if (data->t_to_die < 60e3 || data->t_to_eat < 60e3
+		|| data->t_to_sleep < 60e3)
+	{
+		error_handle("Timestamp should be > 60ms");
+		return (1);
+	}
 	if (av[5])
 		data->num_meals_limit = ft_atoi(av[5]);
 	else
 		data->num_meals_limit = -1;
+	return (0);
 }

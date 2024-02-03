@@ -1,12 +1,12 @@
-#include <pthread.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+/*#include <pthread.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define TH 100
 
-uint64_t	amount = 0;
+uint64_t		amount = 0;
 
 pthread_mutex_t	amount_lock;
 
@@ -18,7 +18,7 @@ void	*update_amount(void *data)
 	return (NULL);
 }
 
-int main()
+int	main(void)
 {
 	pthread_t	waiters[TH];
 
@@ -35,3 +35,4 @@ int main()
 	pthread_mutex_destroy(&amount_lock);
 	printf("%llu\n", amount);
 }
+*/
