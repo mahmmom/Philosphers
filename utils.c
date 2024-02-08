@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:50:01 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/02/03 18:47:15 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:21:57 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ static char	*is_valid(char *str)
 	if (str[i] == '-')
 		error_handle("Only Positive Numbers Allowed");
 	validated = str;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		i++;
-		len++;
-	}
 	return (validated);
 }
 
@@ -45,11 +40,15 @@ int	ft_atoi(char *str)
 	str = is_valid(str);
 	while ((str[i] >= '0' && str[i] <= '9') && str[i])
 	{
+		if ((result > INT_MAX / 10) || (result == INT_MAX / 10 && (str[i]
+					- '0') > INT_MAX % 10) || result < 0)
+		{
+			error_handle("Number is > INT_MAX");
+			return (1);
+		}
 		result = 10 * result + (str[i] - '0');
 		i++;
 	}
-	if (result < 0)
-		error_handle("Number is > INT_MAX");
 	return (result);
 }
 
@@ -92,17 +91,3 @@ void	ft_usleep(long usec, t_data *data)
 		}
 	}
 }
-
-// int	ft_usleep(size_t milliseconds,  t_data *data)
-// {
-// 	size_t	start;
-
-// 	start = get_current_time();
-// 	while ((get_current_time() - start) < milliseconds)
-// 	{
-// 		if(!philo_died)
-// 			return ();
-// 		usleep(500);
-// 	}
-// 	return (0);
-// }

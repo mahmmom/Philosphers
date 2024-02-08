@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:44:15 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/02/06 19:59:19 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:51:29 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ static void	eating_routine(t_philo	*philo)
 	philo_status(TAKE_FIRST_FORK, philo);
 	mutex_handler(&philo->second_fork->fork, LOCK);
 	philo_status(TAKE_SECOND_FORK, philo);
-	if (philo->data->num_meals_limit > 0
-		&& philo->meals_count == philo->data->num_meals_limit)
-		set_bool(&philo->pilo_mutex, &philo->full, true);
 	set_long(&philo->pilo_mutex, &philo->last_meal_time,
 		get_time_day(MILLISECOND));
 	philo_status(EATING, philo);
 	ft_usleep(philo->data->t_to_eat, philo->data);
+	if (philo->data->num_meals_limit > 0
+		&& philo->meals_count == philo->data->num_meals_limit)
+		set_bool(&philo->pilo_mutex, &philo->full, true);
 	philo->meals_count++;
 	mutex_handler(&philo->first_fork->fork, UNLOCK);
 	mutex_handler(&philo->second_fork->fork, UNLOCK);

@@ -8,7 +8,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Ilibft -pthread #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 RM = rm -f
 
