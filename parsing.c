@@ -6,11 +6,12 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:59:24 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/02/03 18:42:26 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:53:05 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 static int	is_valid_number(char *str)
 {
@@ -42,6 +43,8 @@ static int	ft_check(char **av)
 			error_handle("Error, invalid arguments");
 			return (1);
 		}
+		else if (ft_atoi(av[i]) == -404)
+			return (1);
 		i++;
 	}
 	return (0);

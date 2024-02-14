@@ -6,29 +6,11 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:50:01 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/02/08 19:21:57 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:36:19 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static char	*is_valid(char *str)
-{
-	int		i;
-	int		len;
-	char	*validated;
-
-	i = 0;
-	len = 0;
-	while (((str[i] >= 9 && str[i] <= 13) || str[i] == 32) && str[i])
-		i++;
-	if (str[i] == '+')
-		i++;
-	if (str[i] == '-')
-		error_handle("Only Positive Numbers Allowed");
-	validated = str;
-	return (validated);
-}
 
 int	ft_atoi(char *str)
 {
@@ -37,14 +19,17 @@ int	ft_atoi(char *str)
 
 	result = 0;
 	i = 0;
-	str = is_valid(str);
+	while (((str[i] >= 9 && str[i] <= 13) || str[i] == 32) && str[i])
+		i++;
+	if (str[i] == '+')
+		i++;
 	while ((str[i] >= '0' && str[i] <= '9') && str[i])
 	{
 		if ((result > INT_MAX / 10) || (result == INT_MAX / 10 && (str[i]
 					- '0') > INT_MAX % 10) || result < 0)
 		{
 			error_handle("Number is > INT_MAX");
-			return (1);
+			return (-404);
 		}
 		result = 10 * result + (str[i] - '0');
 		i++;

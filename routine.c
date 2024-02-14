@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 18:44:15 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/02/08 18:51:29 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:18:08 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	thinking_routine(t_philo *philo, bool pre_routine)
 	t_think = (philo->data->t_to_eat * 2) - philo->data->t_to_sleep;
 	if (t_think < 0)
 		t_think = 0;
-	ft_usleep(t_think * 0.42, philo->data);
+	ft_usleep(t_think * 0.40, philo->data);
 }
 
 static void	eating_routine(t_philo	*philo)
@@ -88,10 +88,7 @@ void	routine_start(t_data *data)
 
 	i = -1;
 	if (0 == data->num_meals_limit)
-	{
-		printf("%-6d"" %d has taken a fork\n", 0, data->philos->id);
 		return ;
-	}
 	else if (1 == data->philo_num)
 		thread_handle(&data->philos[0].thread_id, one_philo,
 			&data->philos[0], CREATE);

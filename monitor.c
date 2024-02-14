@@ -6,7 +6,7 @@
 /*   By: mohamoha <mohamoha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:37:02 by mohamoha          #+#    #+#             */
-/*   Updated: 2024/02/06 20:00:55 by mohamoha         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:21:05 by mohamoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	philo_died(t_philo	*philo)
 	elapsed = get_time_day(MILLISECOND) - get_long(&philo->pilo_mutex,
 			&philo->last_meal_time);
 	time_to_die = philo->data->t_to_die / 1e3;
-	if (elapsed >= time_to_die)
+	if (elapsed > time_to_die)
 		return (true);
 	return (false);
 }
